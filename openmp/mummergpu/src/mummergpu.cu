@@ -457,15 +457,18 @@ void buildReferenceTexture(Reference* ref,
 
 }
 
+//void boardMemory(size_t * free_mem, size_t * total_mem)
 void boardMemory(unsigned int * free_mem, unsigned int * total_mem)
 {
   // The emulator doesn't allow calls to cuMemGetInfo
+  size_t *_free_mem = (size_t *) free_mem;
+  size_t *_total_mem = (size_t *) total_mem;
 
 #ifdef __DEVICE_EMULATION__
-  *free_mem =  512*1024*1024;
-  *total_mem = 768*1024*1024;
+  *_free_mem =  512*1024*1024;
+  *_total_mem = 768*1024*1024;
 #else
-  CU_SAFE_CALL_NO_SYNC(cuMemGetInfo(free_mem, total_mem));
+  CU_SAFE_CALL_NO_SYNC(cuMemGetInfo(_free_mem, _total_mem));
 #endif
 }
 

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdint.h>
 
 #include <fstream>
 
@@ -16,6 +17,7 @@
 #define OMP
 #define N_THREADS 8
 
+extern char getRef(int refpos, char* ref);
 
 static const int maxdim = 4096;
 
@@ -90,10 +92,12 @@ static const int maxdim = 4096;
 /// getRef
 //////////////////////////////////
 
+#if 0
 char getRef(int refpos, char* ref)
 {
 	return ref[refpos];
 }
+#endif
 
 
 union SingleNode
